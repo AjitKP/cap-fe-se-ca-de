@@ -34,10 +34,7 @@ annotate service.Orders with @(UI.LineItem : [
 
 annotate service.Orders with @(
     Common.DefaultValuesFunction : 'getOrderDefaults',
-    UI.UpdateHidden              : {$edmJson : {$Eq : [
-        {$Path : 'status'},
-        'In Process'
-    ]}}
+    UI.UpdateHidden              : {$edmJson : {$Eq : [{$Path : 'status'},'In Process']}}
 );
 
 
@@ -76,7 +73,6 @@ annotate service.Orders with @(
 //     }
 
 // });
-
 
 
 annotate service.Orders with @(
@@ -138,7 +134,6 @@ annotate service.Orders with @(
         },
     ]
 );
-
 
 
 annotate service.Addresses with @(Capabilities.SearchRestrictions.Searchable : false);
@@ -276,11 +271,9 @@ annotate service.OrderItems with {
 };
 
 annotate service.Orders with {
-    customer @Common.FieldControl : #Mandatory
-};
-
-annotate service.Orders with {
-    descr @Common.FieldControl : #Mandatory
+    customer  @Common.FieldControl  : #Mandatory;
+    descr     @Common.FieldControl  : #Mandatory;
+    totamount @Measures.ISOCurrency : currency_code;
 };
 
 annotate service.Orders with @(UI.FieldGroup #OrderInfo : {
@@ -301,14 +294,7 @@ annotate service.Orders with @(UI.FieldGroup #OrderInfo : {
             $Type                     : 'UI.DataField',
             Value                     : status,
             Label                     : 'Order Status',
-            Criticality               : {$edmJson : {$If : [
-                {$Eq : [
-                    {$Path : 'status'},
-                    'Open'
-                ]},
-                1,
-                3
-            ]}},
+            Criticality               : {$edmJson : {$If : [{$Eq : [{$Path : 'status'},'Open']},1,3]}},
             CriticalityRepresentation : #WithoutIcon
         },
     ],
@@ -335,23 +321,9 @@ annotate service.Orders with @(UI.FieldGroup #CustomerInfo : {
     ],
 });
 
-annotate service.Orders with {
-    totamount @Measures.ISOCurrency : currency_code
-};
 
 annotate service.OrderItems with @(UI.LineItem #Address : []);
 
 annotate service.OrderItems with {
     product @Common.Text : product.text
-};
-
-annotate service.Orders with {
-    status @Common.FieldControl : {$edmJson : {$If : [
-        {$Ne : [
-            {$Path : 'status'},
-            ''
-        ]},
-        1,
-        3
-    ]}}
 };

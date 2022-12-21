@@ -22,7 +22,7 @@ class service extends cds.ApplicationService {
       req.data.quantity > 0 ? quantity = req.data.quantity : quantity = dbItemInfo[0].quantity;
       if (price > 0 && quantity > 0) {
         req.data.netprice = price * quantity;
-        Math.round((req.data.netprice + Number.EPSILON) * 100) / 100;
+        req.data.netprice = Math.round((req.data.netprice + Number.EPSILON) * 100) / 100;
       }
 
     });
