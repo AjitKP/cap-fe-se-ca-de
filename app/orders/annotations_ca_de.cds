@@ -1,4 +1,5 @@
 using orderservice as service from '../../srv/service';
+using from './annotations';
 
 annotate service.Orders with @(UI.Identification : [
     {

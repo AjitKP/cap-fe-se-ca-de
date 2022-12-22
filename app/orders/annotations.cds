@@ -10,27 +10,40 @@ annotate service.Orders with @(UI.HeaderInfo : {
     },
 });
 
-annotate service.Orders with @(UI.LineItem : [
-    {
-        $Type : 'UI.DataField',
-        Label : 'Order Description',
-        Value : descr,
-    },
-    {
-        $Type : 'UI.DataField',
-        Label : 'Address',
-        Value : address,
-    },
-    {
-        $Type : 'UI.DataField',
-        Label : 'Total Amount',
-        Value : totamount,
-    },
-    {
-        $Type : 'UI.DataField',
-        Value : currency_code,
-    },
-]);
+annotate service.Orders with @(
+    UI.LineItem : [
+        {
+            $Type : 'UI.DataField',
+            Label : 'Order Description',
+            Value : descr,
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : customer.firstname,
+            Label : 'First Name',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : customer.lastname,
+            Label : 'Last Name',
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : status,
+            Label : 'Status',
+        },
+        {
+            $Type : 'UI.DataField',
+            Label : 'Total Amount',
+            Value : totamount,
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : currency_code,
+        },
+    ]
+);
+
 
 annotate service.Orders with @(
     Common.DefaultValuesFunction : 'getOrderDefaults',

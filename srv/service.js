@@ -29,7 +29,10 @@ class service extends cds.ApplicationService {
 
     this.after('PATCH', OrderItems, async data => {
 
-      let orderInfo = { totamount: 0 }, result = await cds.read(OrderItems.drafts).where({ ID: data.ID }).columns(['order_ID']);
+      let orderInfo = { totamount: 0 };
+      let result = await cds.read(OrderItems.drafts)
+                            .where({ ID: data.ID })
+                            .columns(['order_ID']);
       let dbItemInfos = await cds.read(OrderItems.drafts).where({ order_ID: result[0].order_ID });
       for (let i = 0; i < dbItemInfos.length; i++) {
         if (dbItemInfos[i].netprice > 0) {

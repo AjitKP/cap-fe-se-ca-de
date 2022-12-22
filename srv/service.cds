@@ -17,16 +17,15 @@ service orderservice @(path : 'service/order') {
     entity Products  as projection on db.Products;
 
     entity Orders    as projection on db.Orders actions {
-        @(
-            cds.odata.bindingparameter.name : '_it',
-            Common.SideEffects              : {TargetProperties : ['_it/status']}
-        )
+
+        @(  cds.odata.bindingparameter.name : '_it',
+            Common.SideEffects              : {TargetProperties : ['_it/status']}   )
         action setOrderProcessing();
-        @(
-            cds.odata.bindingparameter.name : '_it',
-            Common.SideEffects              : {TargetProperties : ['_it/status']}
-        )
+
+        @(  cds.odata.bindingparameter.name : '_it',
+            Common.SideEffects              : {TargetProperties : ['_it/status']}   )
         action setOrderOpen();
+        
     };
 
     function getOrderDefaults() returns Orders;
