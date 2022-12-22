@@ -1,6 +1,10 @@
 using orderservice as service from '../../srv/service';
 using from './annotations';
 
+annotate service.Orders with @(
+    Common.DefaultValuesFunction : 'getOrderDefaults'
+);
+
 annotate service.Orders with @(UI.Identification : [
     {
         $Type         : 'UI.DataFieldForAction',
@@ -15,6 +19,10 @@ annotate service.Orders with @(UI.Identification : [
         ![@UI.Hidden] : {$edmJson : {$Eq : [{$Path : 'status'},'Open']}}
     }
 ]);
+
+annotate service.Orders with @(
+    UI.UpdateHidden              : {$edmJson : {$Eq : [{$Path : 'status'},'In Process']}}
+);
 
 annotate service.Orders with {
     status @Common.FieldControl : {$edmJson : {$If : [{$Ne : [ {$Path : 'status'}, '' ]}, 1, 3 ]}}

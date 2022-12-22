@@ -45,11 +45,6 @@ annotate service.Orders with @(
 );
 
 
-annotate service.Orders with @(
-    Common.DefaultValuesFunction : 'getOrderDefaults',
-    UI.UpdateHidden              : {$edmJson : {$Eq : [{$Path : 'status'},'In Process']}}
-);
-
 
 // annotate service.Orders @(Common : {
 //     SideEffects #CustomerChanged : {
