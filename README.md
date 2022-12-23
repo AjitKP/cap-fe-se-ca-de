@@ -1,7 +1,7 @@
 # Introduction
 This repository is an showcase for CAP application using Fiori Elements UI with Side Effects, Custom Actions and Dynamic Expression examples. For more info please visit the following blog.
 
-
+https://blogs.sap.com/2022/12/23/cap-with-fiori-elements-side-effects-custom-actions-dynamic-expressions/ 
 
 # Getting Started
 
